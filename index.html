@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sourav Garai Portfolio</title>
+<title>Sourav Garai</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -16,12 +16,8 @@
   font-family: 'Poppins', sans-serif;
 }
 
-html {
-  scroll-behavior: smooth;
-}
-
 body {
-  background: #050505;
+  background: #020202;
   color: white;
   overflow-x: hidden;
 }
@@ -29,72 +25,60 @@ body {
 body::before {
   content: "";
   position: fixed;
-  width: 600px;
-  height: 300px;
-  background: radial-gradient(circle, #4f8cff, transparent);
-  filter: blur(120px);
+  width: 500px;
+  height: 200px;
+  background: radial-gradient(circle, #3b82f6, transparent);
+  filter: blur(100px);
   top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: -1;
-  animation: glowMove 8s infinite alternate ease-in-out;
+  animation: pulse 6s infinite alternate;
 }
 
-@keyframes glowMove {
-  0% { transform: translate(-50%, -50%) scale(1); }
-  100% { transform: translate(-50%, -50%) scale(1.3); }
+@keyframes pulse {
+  from { transform: translate(-50%, -50%) scale(1); }
+  to { transform: translate(-50%, -50%) scale(1.3); }
 }
 
 /* HERO SECTION */
 .hero {
-  min-height: 100vh;
+  height: 100vh;
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   position: relative;
 }
 
-.hero-content {
-  text-align: center;
-  animation: fadeIn 1.5s ease-out;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
 .hero h1 {
-  font-size: 72px;
+  font-size: 70px;
   letter-spacing: 10px;
-  font-weight: 700;
 }
 
-.hero .dot {
-  color: #4f8cff;
+.hero h1 span {
+  color: #3b82f6;
 }
 
-.scroll-down {
+.scroll {
   position: absolute;
   bottom: 40px;
-  color: white;
-  font-size: 28px;
-  text-decoration: none;
-  animation: bounce 2s infinite;
+  font-size: 25px;
+  animation: bounce 1.5s infinite;
 }
 
 @keyframes bounce {
   0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(12px); }
+  50% { transform: translateY(10px); }
 }
 
-/* ABOUT SECTION */
-.about-section {
+/* SECTIONS */
+.section {
   min-height: 100vh;
   padding: 100px 20px;
 }
 
-.about-container {
+/* ABOUT */
+.container {
   max-width: 1200px;
   margin: auto;
   display: flex;
@@ -102,77 +86,41 @@ body::before {
   align-items: center;
 }
 
-.left {
-  flex: 1;
-  animation: slideLeft 1s ease;
-}
-
-@keyframes slideLeft {
-  from { opacity: 0; transform: translateX(-80px); }
-  to { opacity: 1; transform: translateX(0); }
-}
-
-.left h4 {
-  color: #aaa;
-}
-
-.left h1 {
-  font-size: 48px;
-  margin: 10px 0 30px;
-  letter-spacing: 3px;
-}
-
 .left img {
-  width: 100%;
-  max-width: 300px;
+  width: 300px;
   border-radius: 15px;
-  box-shadow: 0 0 40px rgba(79, 140, 255, 0.4);
-  transition: 0.4s;
-}
-
-.left img:hover {
-  transform: scale(1.05);
+  box-shadow: 0 0 30px rgba(59, 130, 246, 0.3);
 }
 
 .right {
-  flex: 1.5;
-  display: flex;
-  flex-direction: column;
-  gap: 25px;
-  animation: slideRight 1s ease;
+  flex: 1;
 }
 
-@keyframes slideRight {
-  from { opacity: 0; transform: translateX(80px); }
-  to { opacity: 1; transform: translateX(0); }
+.box {
+  margin-bottom: 25px;
 }
 
 .box h2 {
-  color: #4f8cff;
+  color: #3b82f6;
   margin-bottom: 10px;
 }
 
 .box p {
-  color: #ccc;
-  line-height: 1.7;
-}
-
-.skills {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
+  color: #bbb;
+  line-height: 1.6;
 }
 
 .skills span {
-  border: 1px solid #4f8cff;
-  padding: 8px 14px;
-  border-radius: 8px;
+  border: 1px solid #3b82f6;
+  padding: 8px 12px;
+  margin: 5px;
+  display: inline-block;
+  border-radius: 6px;
   transition: 0.3s;
 }
 
 .skills span:hover {
-  background: #4f8cff;
-  transform: translateY(-3px);
+  background: #3b82f6;
 }
 
 .social {
@@ -182,32 +130,62 @@ body::before {
 
 .social a {
   font-size: 20px;
-  padding: 12px;
-  border-radius: 10px;
-  background: #111;
-  color: #aaa;
+  color: #bbb;
   transition: 0.3s;
 }
 
 .social a:hover {
-  color: #4f8cff;
-  transform: translateY(-5px);
+  color: #3b82f6;
+  transform: translateY(-3px);
 }
 
-.whatsapp a {
-  background: #25D366;
-  padding: 12px 18px;
-  border-radius: 8px;
-  text-decoration: none;
-  color: white;
-  display: inline-block;
-  margin-top: 10px;
+/* PROJECTS */
+.projects {
+  max-width: 1200px;
+  margin: auto;
+}
+
+.projects h2 {
+  color: #3b82f6;
+  margin-bottom: 30px;
+}
+
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  background: #111;
+  padding: 25px;
+  border-radius: 15px;
   transition: 0.3s;
 }
 
-.whatsapp a:hover {
-  background: #1ebe5d;
-  transform: scale(1.05);
+.card:hover {
+  transform: translateY(-10px) scale(1.03);
+  box-shadow: 0 0 30px #3b82f6;
+}
+
+.card h3 {
+  margin-bottom: 10px;
+}
+
+.card p {
+  color: #bbb;
+}
+
+/* SCROLL REVEAL */
+.reveal {
+  opacity: 0;
+  transform: translateY(60px);
+  transition: 1s;
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* FOOTER */
@@ -222,16 +200,16 @@ body::before {
 @media (max-width: 768px) {
   .hero h1 { font-size: 40px; letter-spacing: 5px; }
   
-  .about-container {
+  .container {
     flex-direction: column;
     text-align: center;
   }
-
-  .right {
-    align-items: center;
+  
+  .left img {
+    margin: auto;
   }
-
-  .skills, .social {
+  
+  .social {
     justify-content: center;
   }
 }
@@ -239,75 +217,90 @@ body::before {
 </head>
 <body>
 
-<!-- HERO SECTION -->
-<section class="hero" id="home">
-  <div class="hero-content">
-    <h1>PORTFOLIO<span class="dot">.</span></h1>
-  </div>
-  <a href="#about" class="scroll-down">↓</a>
+<!-- HERO -->
+<section class="hero">
+  <h1>PORTFOLIO<span>.</span></h1>
+  <a href="#about" class="scroll">↓</a>
 </section>
 
-<!-- ABOUT SECTION -->
-<section class="about-section" id="about">
+<!-- ABOUT -->
+<section class="section reveal" id="about">
 
-<div class="about-container">
+<div class="container">
 
-  <div class="left">
-    <h4>Hello, I am</h4>
-    <h1>Sourav Garai</h1>
+<div class="left">
+<img src="https://i.ibb.co/4nKKTkVP/Picsart-26-04-21-22-50-10-704.png">
+</div>
 
-    <img src="https://i.ibb.co/4nKKTkVP/Picsart-26-04-21-22-50-10-704.png">
-  </div>
+<div class="right">
 
-  <div class="right">
+<div class="box">
+<h2>About Me</h2>
+<p>I am a passionate developer and AI enthusiast building real-world projects.</p>
+</div>
 
-    <div class="box">
-      <h2>About Me</h2>
-      <p>
-        I am a passionate developer and AI enthusiast from India, currently preparing for competitive exams while actively building real-world tech projects. I have experience creating AI applications both with APIs and from scratch without relying on external services.
-      </p>
-    </div>
+<div class="box">
+<h2>Skills</h2>
+<div class="skills">
+<span>HTML</span><span>CSS</span><span>JS</span><span>React</span>
+</div>
+</div>
 
-    <div class="box">
-      <h2>Education</h2>
-      <p>2023 - Present<br>B.Tech Aspirant (WBJEE)</p>
-    </div>
+<div class="social">
+<a href="https://github.com/sourav-bwn"><i class="fab fa-github"></i></a>
+<a href="https://wa.me/919382284376"><i class="fab fa-whatsapp"></i></a>
+</div>
 
-    <div class="box">
-      <h2>Skills</h2>
-      <div class="skills">
-        <span>HTML</span>
-        <span>CSS</span>
-        <span>JavaScript</span>
-        <span>React</span>
-        <span>AI Dev</span>
-      </div>
-    </div>
+</div>
 
-    <div class="box">
-      <h2>Work Experience</h2>
-      <p>Built AI projects, web apps, and experimenting with new tech.</p>
-    </div>
+</div>
 
-    <div class="social">
-      <a href="https://linkedin.com/in/sourav-garai-43b39528b" target="_blank"><i class="fab fa-linkedin"></i></a>
-      <a href="https://github.com/sourav-bwn" target="_blank"><i class="fab fa-github"></i></a>
-      <a href="https://instagram.com/sourav.bwn" target="_blank"><i class="fab fa-instagram"></i></a>
-    </div>
+</section>
 
-    <div class="whatsapp">
-      <a href="https://wa.me/919382284376">Chat on WhatsApp</a>
-    </div>
+<!-- PROJECTS -->
+<section class="section reveal">
 
-  </div>
+<div class="projects">
+
+<h2>Projects</h2>
+
+<div class="project-grid">
+
+<div class="card">
+<h3>AI Project</h3>
+<p>Custom AI built without API.</p>
+</div>
+
+<div class="card">
+<h3>Web App</h3>
+<p>Modern responsive UI project.</p>
+</div>
+
+<div class="card">
+<h3>Portfolio</h3>
+<p>Interactive animated portfolio.</p>
+</div>
+
+</div>
 
 </div>
 
 </section>
 
 <div class="footer">
-  ©2026 Sourav Garai
+©2026 Sourav Garai
 </div>
+
+<script>
+window.addEventListener("scroll", () => {
+  document.querySelectorAll(".reveal").forEach(el => {
+    const top = el.getBoundingClientRect().top;
+    if(top < window.innerHeight - 100) {
+      el.classList.add("active");
+    }
+  });
+});
+</script>
 
 </body>
 </html>
