@@ -95,6 +95,41 @@
     .footer span:hover {
       color: #4f8cff;
     }
+
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 40px;
+        letter-spacing: 4px;
+      }
+      .blob {
+        width: 300px;
+        height: 150px;
+      }
+      .footer {
+        padding: 0 20px;
+        font-size: 12px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 28px;
+        letter-spacing: 2px;
+      }
+      .blob {
+        width: 250px;
+        height: 120px;
+      }
+      .footer {
+        flex-direction: column;
+        align-items: center;
+        gap: 5px;
+        bottom: 10px;
+      }
+      .name, .copyright {
+        text-align: center;
+      }
+    }
   </style>
 </head>
 
