@@ -21,77 +21,120 @@ html {
 }
 
 body {
-  background: #050505;
+  background: #000;
   color: white;
   overflow-x: hidden;
 }
 
-body::before {
-  content: "";
-  position: fixed;
-  width: 600px;
-  height: 300px;
-  background: radial-gradient(circle, #4f8cff, transparent);
-  filter: blur(120px);
-  top: 40%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: -1;
-  animation: glowMove 8s infinite alternate ease-in-out;
-}
-
-@keyframes glowMove {
-  0% { transform: translate(-50%, -50%) scale(1); }
-  100% { transform: translate(-50%, -50%) scale(1.3); }
-}
-
 /* HERO SECTION */
 .hero {
-  min-height: 100vh;
+  height: 100vh;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
+  filter: contrast(125%) saturate(150%);
 }
 
-.hero-content {
-  text-align: center;
-  animation: fadeIn 1.5s ease-out;
+/* Glow Blob */
+.blob {
+  position: absolute;
+  width: 600px;
+  height: 250px;
+  background: linear-gradient(to right, #3b82f6, #8b5cf6, #3b82f6);
+  border-radius: 50%;
+  filter: blur(120px);
+  opacity: 0.8;
+  animation: blobMove 12s ease-in-out infinite;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
+@keyframes blobMove {
+  0% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(120px, -80px) scale(1.2); }
+  50% { transform: translate(-120px, 80px) scale(0.9); }
+  75% { transform: translate(-80px, -40px) scale(1.1); }
+  100% { transform: translate(0, 0) scale(1); }
 }
 
-.hero h1 {
-  font-size: 72px;
-  letter-spacing: 10px;
+/* Grain Overlay */
+.grain {
+  position: absolute;
+  inset: 0;
+  opacity: 0.04;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* Main Text */
+.hero-text {
+  font-size: 11vw;
   font-weight: 700;
+  letter-spacing: -0.02em;
+  color: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  z-index: 1;
 }
 
-.hero .dot {
-  color: #4f8cff;
+/* Bottom Left */
+.bottom-left {
+  position: absolute;
+  bottom: 32px;
+  left: 32px;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.6);
 }
 
+.bottom-left .name {
+  font-weight: 500;
+}
+
+.bottom-left .title {
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+/* Bottom Right */
+.bottom-right {
+  position: absolute;
+  bottom: 32px;
+  right: 32px;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.6);
+  text-align: right;
+}
+
+.bottom-right .year {
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+/* Scroll Indicator */
 .scroll-down {
   position: absolute;
-  bottom: 40px;
-  color: white;
-  font-size: 28px;
-  text-decoration: none;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 24px;
   animation: bounce 2s infinite;
+  text-decoration: none;
+  z-index: 10;
 }
 
 @keyframes bounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(12px); }
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(10px); }
 }
 
 /* ABOUT SECTION */
 .about-section {
   min-height: 100vh;
   padding: 100px 20px;
+  background: #000;
 }
 
 .about-container {
@@ -220,7 +263,11 @@ body::before {
 
 /* MOBILE */
 @media (max-width: 768px) {
-  .hero h1 { font-size: 40px; letter-spacing: 5px; }
+  .hero-text { font-size: 15vw; }
+  
+  .bottom-left, .bottom-right {
+    font-size: 12px;
+  }
   
   .about-container {
     flex-direction: column;
@@ -241,9 +288,21 @@ body::before {
 
 <!-- HERO SECTION -->
 <section class="hero" id="home">
-  <div class="hero-content">
-    <h1>PORTFOLIO<span class="dot">.</span></h1>
+  <div class="blob"></div>
+  <div class="grain"></div>
+  
+  <h1 class="hero-text">PORTFOLIO°</h1>
+  
+  <div class="bottom-left">
+    <p class="name">Sourav Garai</p>
+    <p class="title">Visual & Research • Product Design</p>
   </div>
+  
+  <div class="bottom-right">
+    <p>© 2026</p>
+    <p class="year">sourav-portfolio.com</p>
+  </div>
+  
   <a href="#about" class="scroll-down">↓</a>
 </section>
 
