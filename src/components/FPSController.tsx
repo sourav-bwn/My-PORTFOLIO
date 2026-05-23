@@ -39,20 +39,15 @@ const FPSController = forwardRef<{ position: Vector3 }, { bounds?: Bound[] }>(
           case 'ShiftRight': keys.current.shift = false; break
         }
       }
-      const handleMouseDown = () => {
-        gl.domElement.requestPointerLock()
-      }
 
       document.addEventListener('keydown', handleKeyDown)
       document.addEventListener('keyup', handleKeyUp)
-      gl.domElement.addEventListener('mousedown', handleMouseDown)
 
       return () => {
         document.removeEventListener('keydown', handleKeyDown)
         document.removeEventListener('keyup', handleKeyUp)
-        gl.domElement.removeEventListener('mousedown', handleMouseDown)
       }
-    }, [gl])
+    }, [])
 
     useFrame((_, delta) => {
       const { w, a, s, d, shift } = keys.current
