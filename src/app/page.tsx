@@ -1,7 +1,8 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import dynamic from 'next/dynamic';
+import { Canvas } from '@react-three/fiber';
 import PaperOverlay from '@/components/PaperOverlay';
 import Crosshair from '@/components/Crosshair';
 import ProjectModal from '@/components/ProjectModal';
@@ -9,7 +10,7 @@ import { projects, Project } from '@/data/projects';
 
 type RoomName = 'hub' | 'portfolio' | 'gallery' | 'studio' | 'contact';
 
-const SceneLazy = dynamic(() => import('@/components/Scene'), { ssr: false });
+const Scene = dynamic(() => import('@/components/Scene'), { ssr: false });
 
 export default function Home() {
   const [show3d, setShow3d] = useState(false);
@@ -74,11 +75,18 @@ export default function Home() {
       )}
 
       <div style={{ position: 'fixed', inset: 0, zIndex: 0 }}>
-        <SceneLazy
-          currentRoom={currentRoom}
-          onRoomChange={handleRoomChange}
-          onPosterClick={handlePosterClick}
-        />
+        <Canvas
+          camera={{ fov: 70, near: 0.1, far: 100, position: [0, 1.6, 0] }}
+          gl={{ antialias: true, alpha: false }}
+          style={{ width: '100%', height: '100%' }}
+          onCreated={({ gl }) => gl.setClearColor('#e8e0d0')}
+        >
+          <Scene
+            currentRoom={currentRoom}
+            onRoomChange={handleRoomChange}
+            onPosterClick={handlePosterClick}
+          />
+        </Canvas>
       </div>
 
       {show3d && (
