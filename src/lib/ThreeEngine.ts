@@ -226,9 +226,27 @@ export class ThreeEngine {
     this.camera.position.z = Math.max(b.minZ, Math.min(b.maxZ, nz));
   }
 
+  private disposeObject(obj: THREE.Object3D) {
+    // Release GPU resources (geometries, materials, textures) before dropping a
+    // room, or every teleport leaks them.
+    obj.traverse((child) => {
+      const mesh = child as THREE.Mesh;
+      if (mesh.geometry) mesh.geometry.dispose();
+      const material = mesh.material as THREE.Material | THREE.Material[] | undefined;
+      const materials = Array.isArray(material) ? material : material ? [material] : [];
+      for (const m of materials) {
+        const withMap = m as THREE.Material & { map?: THREE.Texture | null };
+        if (withMap.map) withMap.map.dispose();
+        m.dispose();
+      }
+    });
+  }
+
   private buildRoom(name: RoomName) {
     while (this.roomGroup.children.length) {
-      this.roomGroup.remove(this.roomGroup.children[0]);
+      const child = this.roomGroup.children[0];
+      this.roomGroup.remove(child);
+      this.disposeObject(child);
     }
     this.interactables = [];
     this.currentRoom = name;
