@@ -42,6 +42,15 @@ test('contact room shows real contact details, not placeholders', () => {
   assert.ok(engine.includes('github.com/sourav-bwn'), 'real GitHub profile missing');
   assert.ok(engine.includes('souravgarai.bwn@gmail.com'), 'current email missing');
   assert.ok(!engine.includes('sg5517419@gmail.com'), 'stale pre-rename email must not be published');
+  const contact = sliceBetween(engine, 'private buildContact', '// Bench');
+  const m = contact.match(/makeLabel\(c\.text, 0, c\.y, -5\.4, ([\d.]+)\)/);
+  assert.ok(m, 'contact card label call not found');
+  assert.ok(parseFloat(m[1]) >= 0.3, `card labels too small to read (size ${m[1]}); text must fill the card`);
+});
+
+test('label text is fitted to its canvas instead of overflowing', () => {
+  const label = sliceBetween(engine, 'function makeLabel', 'export class ThreeEngine');
+  assert.ok(label.includes('measureText'), 'makeLabel must measure and shrink long text to fit the canvas');
 });
 
 test('project modal never renders a dead "Open Project" link', () => {
