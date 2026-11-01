@@ -70,7 +70,15 @@ function makeLabel(text: string, x: number, y: number, z: number, size = 0.4): T
   canvas.height = 128;
   const ctx = canvas.getContext('2d')!;
   ctx.clearRect(0, 0, 512, 128);
-  ctx.font = `bold ${Math.round(size * 120)}px Caveat, Comic Sans MS, cursive`;
+  let fontSize = Math.round(size * 120);
+  ctx.font = `bold ${fontSize}px Caveat, Comic Sans MS, cursive`;
+  // Keep long strings inside the canvas instead of overflowing its edges.
+  const maxTextWidth = canvas.width - 24;
+  const measured = ctx.measureText(text).width;
+  if (measured > maxTextWidth) {
+    fontSize = Math.max(8, Math.floor(fontSize * (maxTextWidth / measured)));
+    ctx.font = `bold ${fontSize}px Caveat, Comic Sans MS, cursive`;
+  }
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
   ctx.fillStyle = '#222';
@@ -405,7 +413,7 @@ export class ThreeEngine {
     r.push(makeBox(0.2, 4, 12, '#e8e0d0', 8, 2, 0));
     r.push(makeBox(0.2, 4, 12, '#e8e0d0', -8, 2, 0));
     r.push(makeBox(16, 0.2, 12, '#e8e0d0', 0, 4, 0));
-    r.push(makeLabel('Contact', 0, 2.8, -5.5, 0.4));
+    r.push(makeLabel('Contact', 0, 2.8, -5.5, 0.5));
     const cards = [
       { y: 1.8, text: 'souravgarai.bwn@gmail.com' },
       { y: 1.2, text: 'github.com/sourav-bwn' },
@@ -413,7 +421,7 @@ export class ThreeEngine {
     ];
     for (const c of cards) {
       r.push(makePlane(1.5, 0.4, '#fff', 0, c.y, -5.5));
-      r.push(makeLabel(c.text, 0, c.y, -5.4, 0.13));
+      r.push(makeLabel(c.text, 0, c.y, -5.4, 0.45));
     }
     // Bench
     r.push(makeBox(1.5, 0.3, 0.6, '#5c4033', 0, 0.15, 2));
