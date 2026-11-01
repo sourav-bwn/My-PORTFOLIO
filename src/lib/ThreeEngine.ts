@@ -407,9 +407,9 @@ export class ThreeEngine {
     r.push(makeBox(16, 0.2, 12, '#e8e0d0', 0, 4, 0));
     r.push(makeLabel('Contact', 0, 2.8, -5.5, 0.4));
     const cards = [
-      { y: 1.8, text: 'email@example.com' },
-      { y: 1.2, text: '@username' },
-      { y: 0.6, text: 'github.com/user' },
+      { y: 1.8, text: 'souravgarai.bwn@gmail.com' },
+      { y: 1.2, text: 'github.com/sourav-bwn' },
+      { y: 0.6, text: 'in/sourav-garai-43b39528b' },
     ];
     for (const c of cards) {
       r.push(makePlane(1.5, 0.4, '#fff', 0, c.y, -5.5));
