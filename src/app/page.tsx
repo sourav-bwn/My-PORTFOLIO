@@ -153,10 +153,12 @@ export default function Home() {
                 </span>
               ))}
             </div>
-            <a href={selectedProject.projectUrl || '#'} target="_blank" rel="noopener noreferrer"
-              style={{ display: 'inline-block', padding: '8px 24px', background: '#000', color: '#fff', textDecoration: 'none', fontSize: 18 }}>
-              Open Project →
-            </a>
+            {selectedProject.projectUrl && selectedProject.projectUrl !== '#' && (
+              <a href={selectedProject.projectUrl} target="_blank" rel="noopener noreferrer"
+                style={{ display: 'inline-block', padding: '8px 24px', background: '#000', color: '#fff', textDecoration: 'none', fontSize: 18 }}>
+                Open Project →
+              </a>
+            )}
           </div>
         </div>
       )}
