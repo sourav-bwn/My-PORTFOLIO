@@ -115,6 +115,16 @@ export class ThreeEngine {
 
     this.controls = new PointerLockControls(this.camera, document.body);
 
+    // Lights live for the whole session; adding them per room teleport made the
+    // scene brighter with every door click.
+    this.scene.add(new THREE.AmbientLight(0xffffff, 0.6));
+    const dl = new THREE.DirectionalLight(0xffffff, 0.5);
+    dl.position.set(5, 10, 5);
+    this.scene.add(dl);
+    const dl2 = new THREE.DirectionalLight(0xffffff, 0.3);
+    dl2.position.set(-5, 5, -5);
+    this.scene.add(dl2);
+
     this.buildRoom('hub');
 
     document.addEventListener('keydown', this.onKeyDown);
@@ -230,15 +240,6 @@ export class ThreeEngine {
       this.buildContact();
     objs.forEach(o => this.roomGroup.add(o));
     this.scene.add(this.roomGroup);
-
-    // Lights
-    this.scene.add(new THREE.AmbientLight(0xffffff, 0.6));
-    const dl = new THREE.DirectionalLight(0xffffff, 0.5);
-    dl.position.set(5, 10, 5);
-    this.scene.add(dl);
-    const dl2 = new THREE.DirectionalLight(0xffffff, 0.3);
-    dl2.position.set(-5, 5, -5);
-    this.scene.add(dl2);
 
     // Spawn
     const s = SPAWNS[name];
