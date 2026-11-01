@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState, useCallback } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { ThreeEngine, RoomName } from '@/lib/ThreeEngine';
 import { projects, Project } from '@/data/projects';
 
@@ -50,13 +50,6 @@ export default function Home() {
     };
   }, [phase]);
 
-  const handleCanvasClick = useCallback(() => {
-    if (engineRef.current && !engineRef.current.isLocked) {
-      const canvas = canvasRef.current;
-      if (canvas) canvas.requestPointerLock();
-    }
-  }, []);
-
   return (
     <div style={{ position: 'fixed', inset: 0, background: '#e8e0d0' }}>
       {phase === 'loading' && (
@@ -91,7 +84,6 @@ export default function Home() {
       <canvas
         ref={canvasRef}
         style={{ position: 'fixed', inset: 0, width: '100%', height: '100%', display: 'block', cursor: 'crosshair' }}
-        onClick={handleCanvasClick}
       />
 
       <div className="paper-overlay" style={{
@@ -153,10 +145,12 @@ export default function Home() {
                 </span>
               ))}
             </div>
-            <a href={selectedProject.projectUrl || '#'} target="_blank" rel="noopener noreferrer"
-              style={{ display: 'inline-block', padding: '8px 24px', background: '#000', color: '#fff', textDecoration: 'none', fontSize: 18 }}>
-              Open Project →
-            </a>
+            {selectedProject.projectUrl && selectedProject.projectUrl !== '#' && (
+              <a href={selectedProject.projectUrl} target="_blank" rel="noopener noreferrer"
+                style={{ display: 'inline-block', padding: '8px 24px', background: '#000', color: '#fff', textDecoration: 'none', fontSize: 18 }}>
+                Open Project →
+              </a>
+            )}
           </div>
         </div>
       )}
