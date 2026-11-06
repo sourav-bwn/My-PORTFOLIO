@@ -10,7 +10,6 @@ export interface EngineCallbacks {
 }
 
 const PLAYER_HEIGHT = 1.6;
-const RADIUS = 0.3;
 const SPEED = 5;
 const SPRINT = 1.8;
 
